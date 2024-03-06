@@ -4,7 +4,7 @@ const SetScreen = ({ setActivePage }) => {
   return (
     <div>
       <h1>設定画面</h1>
-      <button onClick={() => setActivePage('title')}>メイン画面へ</button>
+      <button onClick={() => setActivePage('main')}>もどる</button>
     </div>
   );
 };

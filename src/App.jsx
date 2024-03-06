@@ -5,6 +5,7 @@ import Main from './Components/MainScreen';
 import Sub from './Components/SubScreen';
 import Set from './Components/SetScreen';
 
+import './Components/Title.css';
 import './Components/NavigationBar.css';
 
 function App() {

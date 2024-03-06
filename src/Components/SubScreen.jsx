@@ -5,7 +5,7 @@ const SubScreen = ({ setActivePage, date }) => {
     <div>
       <h1>ここはサブ画面です</h1>
       <h3>選択された日付: {date}</h3>
-      <button onClick={() => setActivePage('main')}>メイン画面へ</button>
+      <button onClick={() => setActivePage('main')}>もどる</button>
     </div>
   );
 };
