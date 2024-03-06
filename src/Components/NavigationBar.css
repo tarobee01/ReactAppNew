@@ -1,0 +1,14 @@
+.navigationBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigationBar button {
+  width: calc(33.33%);
+  height: 50px;
+  font-size: 20px;
+}
