@@ -1,11 +1,14 @@
 .title1 {
-  margin-top: 25%;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
 }
 
 .title2 {
   position: fixed;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 150px;
