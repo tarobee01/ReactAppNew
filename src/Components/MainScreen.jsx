@@ -9,10 +9,11 @@ import jaLocale from '@fullcalendar/core/locales/ja';
 const MainScreen = ({ setActivePage, setDate }) => {
 
   const renderDayCellContent = (arg) => {
+    const dateStr = arg.date.toISOString().split('T')[0];
     return (
       <div>
         {arg.dayNumberText}
-        <button onClick={() => { setDate(arg.dateStr); setActivePage('sub'); }}>click</button>
+        <button onClick={() => { setDate(dateStr); setActivePage('sub'); }}>click</button>
       </div>
     );
   };

@@ -9,7 +9,7 @@ import './Components/NavigationBar.css';
 
 function App() {
   const [activePage, setActivePage] = useState('title');
-  const [date, setDate] = useState('aaaaa');
+  const [date, setDate] = useState(null);
 
   return (
     <>
