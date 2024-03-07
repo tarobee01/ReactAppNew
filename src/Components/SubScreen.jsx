@@ -66,6 +66,7 @@ const SubScreen = ({ setActivePage, date }) => {
       <h1>ここはサブ画面です</h1>
       <h3>選択された日付: {date}</h3>
       <canvas ref={canvasRef} width={200} height={200} />
+      <br />
       <button onClick={() => setActivePage('main')}>もどる</button>
     </div>
   );
