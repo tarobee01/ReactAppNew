@@ -6,6 +6,7 @@ const SubScreen = ({ setActivePage, date }) => {
   const [endTime, setEndTime] = useState(10);
   const [color, setColor] = useState('#e6c229');
   const [title, setTitle] = useState('遊び');
+  const [dragging, setDragging] = useState(false); // ドラッグ中かどうかを管理
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -60,6 +61,71 @@ const SubScreen = ({ setActivePage, date }) => {
     context.fillStyle = 'red';
     context.fill();
   }, [startTime, endTime, color, title]);
+
+  const handleTouchStart = (e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const x = e.touches[0].clientX - rect.left;
+    const y = e.touches[0].clientY - rect.top;
+
+    // タッチ位置が円内であればドラッグを開始
+    if (isInsideCircle(x, y)) {
+      setDragging(true);
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (dragging) {
+      const canvas = canvasRef.current;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.touches[0].clientX - rect.left;
+      const y = e.touches[0].clientY - rect.top;
+
+      // 角度を計算
+      const angle = Math.atan2(y - radius, x - radius);
+      // 時間を計算
+      let hour = Math.round((angle / (Math.PI * 2) + 0.25) * 24);
+      if (hour < 0) hour += 24;
+      if (hour > 24) hour -= 24;
+
+      // ドラッグしている位置によって開始時間または終了時間を更新
+      if (hour >= startTime && hour <= endTime) {
+        setStartTime(hour);
+      } else if (hour < startTime) {
+        setStartTime(hour);
+        setEndTime(startTime);
+      } else {
+        setEndTime(hour);
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setDragging(false);
+  };
+
+  const isInsideCircle = (x, y) => {
+    const canvas = canvasRef.current;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+    return distance <= radius;
+  };
+
+  const radius = 100;
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    canvas.addEventListener('touchstart', handleTouchStart);
+    canvas.addEventListener('touchmove', handleTouchMove);
+    canvas.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchmove', handleTouchMove);
+      canvas.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [handleTouchStart, handleTouchMove, handleTouchEnd]);
 
   return (
     <div>
