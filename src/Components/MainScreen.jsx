@@ -9,7 +9,11 @@ import jaLocale from '@fullcalendar/core/locales/ja';
 const MainScreen = ({ setActivePage, setDate }) => {
 
   const renderDayCellContent = (arg) => {
-    const dateStr = arg.date.toISOString().split('T')[0];
+    const year = arg.date.getFullYear();
+    const month = (arg.date.getMonth() + 1).toString().padStart(2, '0');
+    const day = arg.date.getDate().toString().padStart(2, '0');
+    const dateStr = `${year}-${month}-${day}`;
+
     return (
       <div>
         {arg.dayNumberText}
