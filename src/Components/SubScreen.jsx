@@ -11,8 +11,8 @@ const SubScreen = ({ setActivePage, date }) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
     const radius = 100;
-    const startAngle = (startTime / 12) * Math.PI * 2;
-    const endAngle = (endTime / 12) * Math.PI * 2;
+    const startAngle = ((startTime - 6) / 24) * Math.PI * 2;
+    const endAngle = ((endTime - 6) / 24) * Math.PI * 2;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -28,10 +28,26 @@ const SubScreen = ({ setActivePage, date }) => {
     context.fillStyle = color;
     context.fill();
 
+    const textRadiusOuter = radius * 1.1;
+    const textRadiusInner = radius * 0.7;
+
+    const textXStart = radius + textRadiusOuter * Math.cos(startAngle);
+    const textYStart = radius + textRadiusOuter * Math.sin(startAngle);
+
+    context.font = '12px Arial';
+    context.fillStyle = 'black';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText(startTime.toString(), textXStart, textYStart);
+
+    const textXEnd = radius + textRadiusOuter * Math.cos(endAngle);
+    const textYEnd = radius + textRadiusOuter * Math.sin(endAngle);
+
+    context.fillText(endTime.toString(), textXEnd, textYEnd);
+
     const textAngle = (startAngle + endAngle) / 2;
-    const textRadius = radius * 0.7;
-    const textX = radius + textRadius * Math.cos(textAngle);
-    const textY = radius + textRadius * Math.sin(textAngle);
+    const textX = radius + textRadiusInner * Math.cos(textAngle);
+    const textY = radius + textRadiusInner * Math.sin(textAngle);
 
     context.font = '16px Arial';
     context.fillStyle = 'black';
