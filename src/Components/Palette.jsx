@@ -75,7 +75,6 @@ function Palette({ showPalette }) {
           flexDirection: 'column',
           alignItems: 'flex-end',
           padding: '5px',
-          maxWidth: 'calc(100% - 30px)',
           borderRadius: '8px',
           boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
           backgroundColor: '#FEFEFA', // Adjusted for a semi-transparent look
@@ -87,7 +86,15 @@ function Palette({ showPalette }) {
               <p>Selected Text: <span style={{ fontWeight: 'bold' }}>{selectedText}</span></p>
             </div>
           )}
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '6px'}}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            overflowX: 'auto',
+            marginBottom: '6px',
+            padding: '5px',
+            maxWidth: 'calc(100vw - 40px)',
+            
+          }}>
             {palette.map((item, index) => (
               <div key={index} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '7px', borderRadius: '10px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' }}>
                 <button
